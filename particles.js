@@ -1413,18 +1413,18 @@ var pJS = function(tag_id, params){
 
 /* ---------- global functions - vendors ------------ */
 
-Object.deepExtend = function(destination, source) {
+Object.deepExtend = (function  deepExtend(destination, source) {
   for (var property in source) {
     if (source[property] && source[property].constructor &&
      source[property].constructor === Object) {
       destination[property] = destination[property] || {};
-      arguments.callee(destination[property], source[property]);
+      deepExtend(destination[property], source[property]);
     } else {
       destination[property] = source[property];
     }
   }
   return destination;
-};
+});
 
 window.requestAnimFrame = (function(){
   return  window.requestAnimationFrame ||
